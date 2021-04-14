@@ -2601,7 +2601,52 @@ var data = [
     }
   ];
 
+ //找DOM元素
+ var area =document.querySelector('#area')
+ var btn = document.querySelectorAll('.btn')
+ var list = document.querySelector('.list')
+ var title = document.querySelector('.title')
+ console.log(list)
 
+ 
+ 
+ //監聽觸發事件
+ area.addEventListener('change', getData);
+
+
+for(i =0;i<btn.length;i++){
+    btn[i].addEventListener('click',getData,false)
+  };
+
+
+
+
+  //抓取資料
+ function getData(e){
+    var datalength = data.length;
+    var getarea = e.target.value;
+    var ary  = [];
+    for(var i=0; i<datalength; i++){
+        if(data[i].Zone == getarea){
+            ary.push({
+                Add:data[i].Add,
+                Name:data[i].Name,
+                Opentime:data[i].Opentime,
+                Tel:data[i].Tel,
+                Picture1:data[i].Picture1
+            });
+            console.log(ary)
+        }
+   }
+   //顯示內容
+   var str = '';
+   for(i = 0; i<ary.length;i++){
+     str += '<div class="card"><div><div style="background:url('+ ary[i].Picture1 +')"><div>'+ ary[i].Name+'</div></div><div><p> '+ ary[i].Opentime +'</p><p>'+ary[i].Add+'</p><p>'+ ary[i].Tel +'</p></div></div></div>';
+   }
+   list.innerHTML = str;
+   title.textContent = getarea;
+  
+ }
 
 
 
